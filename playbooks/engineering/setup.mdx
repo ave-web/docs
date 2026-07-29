@@ -1,5 +1,5 @@
 ---
-title: "Engineering Dev Environment Setup Guide"
+title: "Engineering Dev Environment: Installation and Setup"
 sidebarTitle: "Dev Setup"
 description: "Set up your local development environment from scratch: tools to install, repos to clone, and how to run the stack locally on day one."
 ---
@@ -24,15 +24,21 @@ Before you begin, make sure you have the following in place:
 | Python | 3.11+ | `pyenv install 3.11` |
 | Docker | latest | Docker Desktop |
 | Git | latest | via Homebrew |
-| VS Code or Cursor | recommended editor | [Download here](#) |
+| VS Code or Cursor | recommended editor | [code.visualstudio.com](https://code.visualstudio.com) |
 
 ```bash Setup script
 # Install Homebrew (macOS)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install core tools
-brew install git node python
+brew install git
 brew install --cask docker visual-studio-code
+
+# Install Node.js via nvm
+nvm install --lts
+
+# Install Python via pyenv
+pyenv install 3.11
 ```
 
 ## Clone and Configure
