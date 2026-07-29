@@ -1,0 +1,82 @@
+---
+title: "Incident Response Playbook and On-Call Guide"
+sidebarTitle: "Incidents"
+description: "How to respond to production incidents: detection, communication, mitigation, and post-mortems. Includes on-call rotation setup."
+---
+
+When something breaks in production, a fast and calm response makes all the difference. This playbook defines exactly what to do — from the first alert to the post-mortem. Follow these steps every time, even when you're under pressure.
+
+## Incident Severity Levels
+
+| Level | Description | Response Time |
+|-------|-------------|---------------|
+| P0 | All users impacted; data loss risk | Immediate — < 15 min |
+| P1 | Major feature broken; many users impacted | < 1 hour |
+| P2 | Minor degradation; partial impact | < 4 hours |
+| P3 | Cosmetic or minor issue | Can wait for next sprint |
+
+## Incident Response Steps
+
+<Steps>
+  <Step title="Detect">
+    An alert fires in PagerDuty or Datadog, or a report comes in through the `#incidents` Slack channel. Treat all credible reports as real incidents until you confirm otherwise.
+  </Step>
+  <Step title="Acknowledge">
+    The on-call engineer acknowledges the alert within 15 minutes for P0 incidents, or within 1 hour for P1. Acknowledging confirms that a human is actively looking at the problem.
+  </Step>
+  <Step title="Communicate">
+    Post an initial status update in `#incidents` as soon as you've acknowledged. Use the incident started template below. Keep the team informed — silence is worse than uncertainty.
+  </Step>
+  <Step title="Triage">
+    Identify the blast radius: how many users are affected, which systems are involved, and whether data is at risk. Assign the correct severity level so the right people are looped in.
+  </Step>
+  <Step title="Mitigate">
+    Take the fastest action that reduces impact. Options include rolling back the last deploy, toggling a feature flag off, or applying a targeted hotfix. Prefer a rollback over a forward fix when in doubt.
+  </Step>
+  <Step title="Resolve">
+    Confirm that all affected services are healthy and that the impact has stopped. Check your monitoring dashboards, run smoke tests if available, and verify that error rates have returned to baseline.
+  </Step>
+  <Step title="Post-mortem">
+    Schedule a blameless retrospective within 48 hours of resolution. Write up the incident doc before the meeting while the details are fresh. Share the completed post-mortem with the whole engineering team.
+  </Step>
+</Steps>
+
+## Communication Templates
+
+Use these templates to keep communication consistent and clear during and after an incident.
+
+**Incident started:**
+
+```text
+📢 [INCIDENT STARTED] P1 — Login service returning 500s
+Impact: ~20% of users unable to log in
+Engineer: @your-name
+Status: Investigating
+```
+
+**Incident resolved:**
+
+```text
+✅ [INCIDENT RESOLVED] P1 — Login service returning 500s
+Duration: 45 minutes
+Root cause: Bad deploy of auth-service v2.3.1
+Fix: Rolled back to v2.3.0
+Post-mortem: [link]
+```
+
+## Post-Mortems
+
+Run every P0 and P1 as a blameless post-mortem. The goal is to find and fix the system or process failures that allowed the incident to happen — not to assign blame to individuals. People make mistakes; good systems catch them before they become incidents. Every post-mortem document should include:
+
+- A timeline of events from first detection to resolution
+- Root cause analysis
+- Contributing factors (what made the system vulnerable)
+- Action items with clear owners and due dates
+
+## On-Call Rotation
+
+The on-call schedule is managed in PagerDuty and rotates weekly. All senior engineers are on the rotation. When you are on call, you are expected to acknowledge P0 and P1 alerts within 15 minutes at any hour. Make sure your PagerDuty notifications are enabled and your phone is not on silent during your on-call week. If you need to swap a shift, arrange it directly with a teammate and update PagerDuty to reflect the change.
+
+<Warning>
+  Never try to hotfix in production without telling the team. Post in #incidents first, even if you're 90% sure of the fix.
+</Warning>

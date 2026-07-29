@@ -1,13 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Company Brain",
+  "projectType": "saas",
+  "projectName": "Company Brain",
+  "projectDescription": "A centralized knowledge hub where teams can onboard quickly, find processes, and stay aligned across the whole company.",
   "theme": "almond",
-  "colors": {
-    "primary": "#ef7025",
-    "light": "#eec9bc",
-    "dark": "#4fa1ab"
-  },
-  "favicon": "/favicon.svg",
+  "primaryColor": "#ef7025",
+  "lightColor": "#eec9bc",
+  "darkColor": "#4fa1ab",
   "navigation": {
     "tabs": [
       {
@@ -89,11 +87,13 @@
       }
     ]
   },
-  "navbar": {
-    "primary": {
-      "type": "button",
-      "label": "Edit This Page",
-      "href": "https://github.com/ave-web/docs"
-    }
-  }
+  "keyFeatures": [
+    "Centralized company knowledge and policies",
+    "Team onboarding checklists and guides",
+    "Engineering, product, and GTM playbooks",
+    "People operations — benefits, time off, hiring",
+    "Decision-making and meeting frameworks",
+    "Tool and tech stack reference"
+  ],
+  "publicApiSurface": []
 }

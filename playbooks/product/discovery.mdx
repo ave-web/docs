@@ -1,0 +1,80 @@
+---
+title: "Product Discovery: How We Validate Before Building"
+sidebarTitle: "Discovery"
+description: "Our product discovery process: how we identify problems, run customer interviews, test hypotheses, and decide what to build."
+---
+
+Discovery is the work we do to make sure we're solving the right problem before writing a line of code. This page covers how we run discovery at this company.
+
+## Discovery vs Delivery
+
+Product work runs in two parallel modes. **Discovery** is about figuring out *what* to build — validating that a problem is real, that customers care about it, and that our proposed solution will actually work. **Delivery** is about building it well and shipping it reliably. Both modes run at the same time: while one team is delivering last cycle's decisions, another is discovering what comes next. Keeping them parallel means you're never building in the dark.
+
+## The Discovery Loop
+
+<Steps>
+  <Step title="Identify the problem">
+    Start with a customer pain or a business opportunity. Write it down in plain language before jumping to solutions.
+  </Step>
+  <Step title="Define the question">
+    Clarify exactly what you need to learn to validate the problem. A sharp question makes research faster and synthesis easier.
+  </Step>
+  <Step title="Research">
+    Run customer interviews, dig into product analytics, and review support tickets. Look for patterns across multiple sources, not just one signal.
+  </Step>
+  <Step title="Synthesize">
+    Step back and ask: what did we actually learn? Distill the raw data into a crisp insight that the whole team can act on.
+  </Step>
+  <Step title="Ideate">
+    Generate multiple potential solutions — at least three. Resist locking in on the first idea that feels right.
+  </Step>
+  <Step title="Test">
+    Prototype or spike the most promising solution. Expose it to real users before committing engineering time to a full build.
+  </Step>
+  <Step title="Decide">
+    Based on what you learned from testing, make a clear call: build it, iterate on the concept, or kill the idea and move on.
+  </Step>
+</Steps>
+
+## Customer Interviews
+
+Running good interviews is a skill. Follow these practices to get signal you can trust:
+
+- **Ask about past behavior, not hypothetical future behavior.** "Tell me about the last time you had to do X" beats "Would you use a feature that did Y?"
+- **Record and share clips with the team.** Hearing customers in their own words is far more persuasive than a written summary.
+- **Avoid leading questions.** Don't telegraph the answer you're hoping for — let the customer tell you what's actually true for them.
+- **Aim for 5–8 interviews per problem space.** Patterns emerge quickly; beyond eight you're usually hearing the same things again.
+
+## Artifacts
+
+Every discovery effort should produce at least one of these documents. Keep them short and share them widely.
+
+<CardGroup cols={2}>
+  <Card icon="file-lines" title="Problem Brief">
+    A one-pager that defines the problem, names the target customer, and explains why solving it matters now.
+  </Card>
+  <Card icon="flask" title="Hypothesis">
+    A structured statement: *if we do X, we expect Y because Z*. Makes your assumptions explicit so you can test and disprove them.
+  </Card>
+  <Card icon="magnifying-glass" title="Research Summary">
+    A synthesis of what you learned from interviews, data, and other sources. Focuses on insights, not raw notes.
+  </Card>
+  <Card icon="screwdriver-wrench" title="Solution Spec">
+    Describes what you're building and why — the what, the constraints, and the success criteria. Input for the design and engineering process.
+  </Card>
+</CardGroup>
+
+## When to Ship Without Discovery
+
+Not every change needs a full discovery cycle. Some situations give you enough confidence to move straight to delivery.
+
+<Accordion title="When can we skip discovery?">
+  - **Bugs and reliability issues** — the problem is known and the fix is clear.
+  - **Clear regulatory requirements** — an external mandate defines what needs to be done.
+  - **Internal tooling with known requirements** — the team using the tool has already told you exactly what they need.
+  - **Small improvements with strong signal from customers** — a high-volume, consistent request that multiple customers have articulated clearly.
+</Accordion>
+
+<Tip>
+  The best discovery is continuous. Talk to customers every week — even a 20-minute conversation uncovers surprises.
+</Tip>

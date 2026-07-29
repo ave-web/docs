@@ -1,0 +1,75 @@
+---
+title: "Code Review Standards and Best Practices"
+sidebarTitle: "Code Review"
+description: "How we do code review at the engineering team: what to look for, how to give feedback, and how to get your PR reviewed quickly."
+---
+
+Code review is one of the highest-leverage activities in engineering — it improves code quality, spreads knowledge, and catches bugs before they reach production. Done well, it makes the whole team faster and the codebase more maintainable.
+
+## As the Author
+
+<Steps>
+  <Step title="Self-review your diff">
+    Before you request a review, go through your own diff as if you were the reviewer. Catch obvious issues, clean up leftover debug code, and make sure the change is exactly what you intended.
+  </Step>
+  <Step title="Write a clear PR description">
+    Explain what changed, why you made the change, and how a reviewer can test it. A good description cuts review time significantly and helps future engineers understand the commit history.
+  </Step>
+  <Step title="Tag the right reviewers">
+    Use CODEOWNERS for automatic reviewer assignment on files outside your area. For cross-cutting changes, manually tag the relevant domain owners. Don't tag the entire team — be targeted.
+  </Step>
+  <Step title="Keep the PR focused">
+    One concern per PR. If you find a second bug while working on a feature, open a separate PR for it. Focused PRs are easier to review, easier to revert, and easier to understand in the future.
+  </Step>
+  <Step title="Respond to all comments">
+    Address every comment before you merge — either by making the change or by leaving a reply that explains your reasoning. Don't leave conversations unresolved.
+  </Step>
+</Steps>
+
+## As the Reviewer
+
+<Steps>
+  <Step title="Review within 24 hours">
+    Aim to review PRs the same day they're opened. Waiting more than 24 hours blocks your teammates and slows down the team's velocity. Treat review requests as high-priority work.
+  </Step>
+  <Step title="Read the description first">
+    Before you look at the diff, read the PR description. Understanding the intent of a change helps you evaluate whether the implementation is correct — and avoids feedback that misses the point.
+  </Step>
+  <Step title="Use the ACID framework">
+    Leave comments using one of three statuses: **Approve** (confident the change is safe to ship), **Comment** (feedback that doesn't block merge), or **Request Changes** (something must be fixed before this merges).
+  </Step>
+  <Step title="Be specific and constructive">
+    Point to the exact line and explain what the issue is. Suggest an alternative when you can. Your goal is to help, not to gatekeep — frame feedback as a suggestion, not a demand.
+  </Step>
+  <Step title="Approve when you're confident">
+    Approve the PR when you're satisfied the change is correct, safe, and ready to ship. Don't withhold approval over subjective style preferences — leave those as non-blocking comments.
+  </Step>
+</Steps>
+
+## What to Look For
+
+<AccordionGroup>
+  <Accordion title="Correctness">
+    Does the code do what the PR description says it does? Walk through the logic manually for the main code path and any edge cases. Check that error handling is in place and that the change doesn't break existing behaviour.
+  </Accordion>
+  <Accordion title="Tests">
+    Are the important code paths covered by tests? Check that edge cases, error states, and boundary conditions are tested — not just the happy path. Look for tests that are too tightly coupled to implementation details.
+  </Accordion>
+  <Accordion title="Readability">
+    Is the code self-explanatory? Variable names, function names, and structure should communicate intent without requiring a comment. If you need to read a block multiple times to understand it, it probably needs a refactor or a clarifying comment.
+  </Accordion>
+  <Accordion title="Performance">
+    Are there any obvious performance bottlenecks? Look for N+1 queries, unnecessary re-renders, unbounded loops, or large data structures being passed around. Flag anything that could cause problems at scale.
+  </Accordion>
+  <Accordion title="Security">
+    Are there any injection risks — SQL, command, or template injection? Are secrets or credentials ever logged or exposed in responses? Is user input validated and sanitised before use? Escalate any serious security concerns immediately.
+  </Accordion>
+</AccordionGroup>
+
+## Comment Etiquette
+
+Use comment prefixes to signal the weight of your feedback at a glance. `nit:` marks a minor style or preference comment that the author can take or leave. `q:` flags a genuine question — you want to understand the choice, not necessarily change it. `blocker:` means the issue must be resolved before the PR can merge. Keep all feedback kind and direct — critique the code, never the person. Assume good intent, and remember that tone is hard to read in text.
+
+<Tip>
+  Praise good code too. A comment like "nice abstraction here!" goes a long way.
+</Tip>

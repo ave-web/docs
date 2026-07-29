@@ -1,0 +1,84 @@
+---
+title: "Design Process: From Concept to Shipped UI"
+sidebarTitle: "Design Process"
+description: "How the design team works: the design process from brief to handoff, tools we use, design review, and how engineers and PMs collaborate with design."
+---
+
+Good design is invisible when it works. This page explains how design happens at the company — from the first brief to the final handoff — and how to collaborate with the design team effectively.
+
+## The Design Process
+
+<Steps>
+  <Step title="Briefing">
+    The PM shares the problem brief with the designer. Use this session to align on scope, constraints, edge cases, and the success metrics you'll use to evaluate the design.
+  </Step>
+  <Step title="Exploration">
+    The designer produces 2–3 concepts at low fidelity. The goal is breadth, not polish — exploring different directions before committing to one.
+  </Step>
+  <Step title="Design Review">
+    Share the concepts in the weekly design review. Collect structured feedback from peers, PMs, and engineers before moving forward.
+  </Step>
+  <Step title="Iteration">
+    Refine the chosen direction based on feedback. If the changes are significant, bring the work back for a second design review before progressing.
+  </Step>
+  <Step title="High Fidelity">
+    Produce pixel-perfect mockups in Figma, including all states (empty, loading, error), responsive breakpoints, and edge cases.
+  </Step>
+  <Step title="Handoff">
+    Add redlines and component specs to the Figma file. Notify the engineering team that the designs are ready and walk them through anything non-obvious.
+  </Step>
+  <Step title="QA">
+    The designer reviews the implementation against the Figma file before launch. Raise discrepancies as issues, not verbal notes, so they're tracked.
+  </Step>
+</Steps>
+
+## Design Tools
+
+| Tool        | Purpose                                      |
+|-------------|----------------------------------------------|
+| Figma       | UI design and prototyping                    |
+| FigJam      | Whiteboarding and discovery workshops        |
+| Maze        | Usability testing                            |
+| Storybook   | Component library reference                  |
+
+## Design Principles
+
+<CardGroup cols={2}>
+  <Card icon="user" title="User-Centered">
+    Start with the user's goal, not the UI. Every design decision should trace back to a real user need.
+  </Card>
+  <Card icon="cube" title="Consistent">
+    Use the design system. Don't reinvent components that already exist — consistency reduces cognitive load and speeds up development.
+  </Card>
+  <Card icon="minimize" title="Simple">
+    Remove everything that doesn't serve the user. If you can't justify an element, cut it.
+  </Card>
+  <Card icon="universal-access" title="Accessible">
+    Design for WCAG AA from the start. Accessibility is not a retrofit — build it in at the concept stage.
+  </Card>
+</CardGroup>
+
+## Working with Design
+
+<Tabs>
+  <Tab title="As a PM">
+    - **Include a clear problem brief.** Give the designer the problem, the target user, the constraints, and the success metrics before the first meeting.
+    - **Participate in design reviews.** Show up, give specific feedback, and represent the customer's perspective.
+    - **Don't prescribe solutions.** Describe the problem you need solved, not the UI you imagine. Let the designer explore the solution space.
+    - **Respect design's creative space.** Give feedback, but trust the designer to own the visual and interaction decisions within the brief.
+  </Tab>
+  <Tab title="As an Engineer">
+    - **Review the handoff in Figma before you start coding.** Understand the full scope — all states, breakpoints, and edge cases — before writing a line.
+    - **Raise implementation concerns early.** If something will be expensive or technically awkward to build, surface it during handoff, not after you've shipped.
+    - **Flag design inconsistencies rather than guessing.** If the designs conflict with the design system or are ambiguous, ask the designer — don't make a judgment call alone.
+    - **Do a UI QA pass with the designer before launch.** Walk through the live implementation together and resolve any discrepancies before users see it.
+  </Tab>
+</Tabs>
+
+## Design Review
+
+Design crits happen every Tuesday and are open to everyone in the company. Submit your work by Monday EOD so reviewers have time to look before the session. All major product surfaces must pass through design review before dev handoff — no exceptions. Reviews are a collaborative ritual, not a gate; come ready to give and receive specific, constructive feedback.
+
+<Note>
+  The design system is the source of truth for components. If you need a component that doesn't exist, talk to the design team before building it custom.
+</Note>

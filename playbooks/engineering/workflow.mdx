@@ -1,0 +1,79 @@
+---
+title: "Engineering Workflow: From Ticket to Deployment"
+sidebarTitle: "Workflow"
+description: "How work moves through the engineering team: picking up tickets, branching, opening PRs, getting reviews, and deploying to production."
+---
+
+This page describes the end-to-end workflow for engineering work — from picking up an issue to shipping it to production.
+
+## The Development Cycle
+
+<Steps>
+  <Step title="Pick up a ticket">
+    Pull the next ticket from the top of the backlog in Linear. Make sure the ticket is well-defined and you understand the acceptance criteria before you start.
+  </Step>
+  <Step title="Create a branch">
+    Create a branch from `main` using the naming convention `<type>/<ticket-id>-<short-description>`. For example: `feat/ENG-123-add-login`.
+
+    ```bash Branch naming
+    # Feature
+    git checkout -b feat/ENG-123-add-user-login
+
+    # Bug fix
+    git checkout -b fix/ENG-456-fix-auth-redirect
+
+    # Chore
+    git checkout -b chore/ENG-789-update-dependencies
+    ```
+  </Step>
+  <Step title="Write code and tests">
+    Implement the change. Write tests alongside your code — don't leave them for the end. Follow the existing code style and patterns in the codebase.
+  </Step>
+  <Step title="Open a pull request">
+    Open a PR against `main` with a clear title and description. Include what changed, why, and how a reviewer can test it. Link the PR to the relevant Linear ticket.
+  </Step>
+  <Step title="Request review">
+    Request review from at least one teammate. Use CODEOWNERS for automatic assignment on files you don't own. Don't merge without an approval.
+  </Step>
+  <Step title="Address feedback">
+    Respond to all review comments. Make the requested changes or explain your reasoning if you disagree. Re-request review once you've addressed all feedback.
+  </Step>
+  <Step title="Merge">
+    Once approved, merge using a **squash merge** to keep the commit history clean. Write a clear, descriptive commit message for the squash commit.
+  </Step>
+  <Step title="Deployment">
+    Deployment is automatic via CI/CD on merge to `main`. Monitor the deployment in your CI dashboard and verify the change is working correctly in production.
+  </Step>
+</Steps>
+
+## PR Standards
+
+Follow these standards when opening a pull request:
+
+- Keep PRs small — aim for fewer than 400 lines of change where possible
+- Make one logical change per PR; don't bundle unrelated fixes
+- Include tests for all new code and bug fixes
+- Link the PR to the relevant Linear ticket in the description
+- Add screenshots or screen recordings for any UI changes
+
+## Environments
+
+| Environment | Purpose | Deploy Trigger |
+|-------------|---------|----------------|
+| Local dev | Local testing and development | Manual |
+| Staging | Pre-production QA and validation | Merged to `staging` branch |
+| Production | Live traffic | Merged to `main` |
+
+## Definition of Done
+
+A ticket is only done when all of the following are true:
+
+- Code has been reviewed and approved by at least one teammate
+- All tests pass in CI (unit, integration, and lint)
+- Documentation has been updated to reflect the change
+- The ticket is marked as done in Linear
+- No regressions have been observed in staging
+
+<Note>
+  Don't merge to main without a passing CI check. The pipeline runs unit tests, integration tests, and a lint check.
+</Note>

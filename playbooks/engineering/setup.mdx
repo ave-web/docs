@@ -1,0 +1,93 @@
+---
+title: "Engineering Dev Environment Setup Guide"
+sidebarTitle: "Dev Setup"
+description: "Set up your local development environment from scratch: tools to install, repos to clone, and how to run the stack locally on day one."
+---
+
+This guide walks you through setting up your local development environment — from required tools to running the full stack locally for the first time.
+
+## Prerequisites
+
+Before you begin, make sure you have the following in place:
+
+- macOS or Linux (Windows users should set up WSL2)
+- Homebrew (macOS)
+- Git
+- Docker Desktop
+- A terminal emulator of your choice
+
+## Required Tools
+
+| Tool | Version | Install Command |
+|------|---------|-----------------|
+| Node.js | LTS | `nvm install --lts` |
+| Python | 3.11+ | `pyenv install 3.11` |
+| Docker | latest | Docker Desktop |
+| Git | latest | via Homebrew |
+| VS Code or Cursor | recommended editor | [Download here](#) |
+
+```bash Setup script
+# Install Homebrew (macOS)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install core tools
+brew install git node python
+brew install --cask docker visual-studio-code
+```
+
+## Clone and Configure
+
+<Steps>
+  <Step title="Clone the main repo">
+    Clone the repository to your local machine:
+
+    ```bash
+    git clone git@github.com:your-org/your-repo.git
+    ```
+  </Step>
+  <Step title="Configure environment variables">
+    Copy the example env file and fill in the required values:
+
+    ```bash
+    cp .env.example .env.local
+    ```
+
+    Open `.env.local` and fill in all required variables before continuing.
+  </Step>
+  <Step title="Install dependencies">
+    Install all project dependencies:
+
+    ```bash
+    npm install
+    ```
+  </Step>
+  <Step title="Start the local stack">
+    Spin up all services using Docker Compose:
+
+    ```bash
+    docker compose up -d
+    ```
+  </Step>
+</Steps>
+
+## Verifying Your Setup
+
+Once the stack is running, confirm everything is working correctly. Visit `http://localhost:3000` in your browser — you should see the application running. Run the test suite with `npm test` to make sure all tests pass on a clean checkout. Open Docker Desktop and verify that all services show a healthy (green) status. If anything looks off, check the logs with `docker compose logs -f` to identify the issue.
+
+## Common Issues
+
+<AccordionGroup>
+  <Accordion title="Port conflicts">
+    If a service fails to start because a port is already in use, find and stop the conflicting process. Run `lsof -i :<port>` to identify what's using the port, then kill it with `kill -9 <PID>`. Alternatively, update `docker-compose.yml` to map the service to a different local port.
+  </Accordion>
+  <Accordion title="Docker memory issues">
+    If Docker containers crash or perform poorly, your Docker Desktop memory limit may be too low. Open Docker Desktop, go to **Settings → Resources**, and increase the memory allocation to at least 8 GB. Apply the changes and restart Docker.
+  </Accordion>
+  <Accordion title="Node version mismatch">
+    If you see errors related to an unsupported Node.js version, use `nvm` to switch to the correct version. Run `nvm use` in the project root — if an `.nvmrc` file is present, it will automatically select the right version. If not, check the `engines` field in `package.json` for the required version and run `nvm install <version> && nvm use <version>`.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  Pin your tool versions with `.nvmrc` and `.python-version` files. This prevents subtle bugs when versions drift across the team.
+</Tip>
